@@ -65,7 +65,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .antMatchers("/compras/*")
       .permitAll()
       .anyRequest()
-      .authenticated();
+      .authenticated()
+      .and()
+      .addFilterBefore(
+        new LoginFilter("/login", authenticationManager()),
+        UsernamePasswordAuthenticationFilter.class
+      )
+      .addFilterBefore(
+        new AuthorizationFilter(),
+        UsernamePasswordAuthenticationFilter.class
+      );
   }
   @Bean
     CorsConfigurationSource corsConfigurationSource() {
