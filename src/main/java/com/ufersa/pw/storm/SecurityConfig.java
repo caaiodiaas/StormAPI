@@ -45,11 +45,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .authorizeRequests()
       .antMatchers(HttpMethod.POST, "/login")
       .permitAll()
-      .antMatchers(HttpMethod.POST, "/usuarios")
+      .antMatchers("/usuarios")
       .permitAll()
-      .antMatchers(HttpMethod.GET, "/usuarios")
+      .antMatchers("/usuarios/*")
       .permitAll()
-      .antMatchers(HttpMethod.GET, "/usuarios/*")
+      .antMatchers("/carrinhos")
+      .permitAll()
+      .antMatchers("/carrinhos/*")
+      .permitAll()
+      .antMatchers("/produtos")
+      .permitAll()
+      .antMatchers("/produtos/*")
+      .permitAll()
+      .antMatchers("/enderecos")
+      .permitAll()
+      .antMatchers("/enderecos/*")
+      .permitAll()
+      .antMatchers("/compras")
+      .permitAll()
+      .antMatchers("/compras/*")
       .permitAll()
       .anyRequest()
       .authenticated()
@@ -70,8 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         config.setAllowedOrigins(Arrays.asList("*"));
         config.setAllowedMethods(Arrays.asList("*"));
         config.setAllowedHeaders(Arrays.asList("*"));
-        config.setAllowCredentials(true);
         config.applyPermitDefaultValues();
+        config.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", config);
         return source;
     }
